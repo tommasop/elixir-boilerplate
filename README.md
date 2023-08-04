@@ -89,7 +89,7 @@ For convenience, you can use the commands included in the Makefile:
 1. Install [asdf](https://asdf-vm.com/guide/getting-started.html#_1-install-dependencies)
 2. Add the [asdf erlang plugin](https://github.com/asdf-vm/asdf-erlang) `asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git`
 3. Add the [asdf elixir plugin](https://github.com/asdf-vm/asdf-elixir) `asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git`
-4. Install [fnm](https://github.com/Schniz/fnm) `curl -fsSL https://fnm.vercel.app/install | bash`
+4. Add the [asdf nodejs plugin](https://github.com/asdf-vm/asdf-nodejs) `asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git`
 ### First run
 
 1. Clone the project repository: `git clone git@github.com:Plus17/phoenix-boilerplate.git my_app`

@@ -61,9 +61,32 @@ defmodule AppName.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
 
+      # API
+      {:jsonapi, "~> 1.6"},
+
       # Code quality
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.14", only: :test},
+
+      # Configuration
+      {:dotenv_parser, "~> 2.0"},
+
+      # Css framework and icons
+      {:heroicons, "~> 0.5"},
+
+      # Dialyzer
+      {:dialyxir, "~> 1.2", only: [:dev, :test], runtime: false},
+
+      {:cors_plug, "~> 3.0"},
+
+      # Instrumentation
+      {:opentelemetry_exporter, "~> 1.6"},
+      {:opentelemetry_api, "~> 1.2"},
+      {:opentelemetry, "~> 1.3"},
+      {:opentelemetry_semantic_conventions, "~> 0.2"},
+      {:opentelemetry_cowboy, "~> 0.2.1"},
+      {:opentelemetry_phoenix, "~> 1.1"},
+      {:opentelemetry_ecto, "~> 1.1"},
 
       # Testing
       {:ex_machina, "~> 2.7.0", only: [:dev, :test]},

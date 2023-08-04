@@ -1,10 +1,35 @@
 import Config
+import AppName.ConfigHelpers
 
 # config/runtime.exs is executed for all environments, including
 # during releases. It is executed after compilation and before the
 # system starts, so it is typically used to load production configuration
 # and secrets from environment variables or elsewhere. Do not define
 # any compile-time configuration in here, as it won't be applied.
+
+DotenvParser.load_file(".env.#{config_env()}")
+
+canonical_uri = get_env("CANONICAL_URL", :uri)
+static_uri = get_env("STATIC_URL", :uri)
+
+config :app_name,
+  canonical_host: get_uri_part(canonical_uri, :host),
+  force_ssl: get_uri_part(canonical_uri, :scheme) == "https"
+
+database_url =
+  System.get_env("DATABASE_URL") ||
+    raise """
+    environment variable DATABASE_URL is missing.
+    For example: ecto://USER:PASS@HOST/DATABASE
+    """
+
+config :app_name, AppName.Repo,
+  # ssl: true,
+  # socket_options: [:inet6],
+  url: database_url,
+  ssl: get_env("DATABASE_SSL", :boolean),
+  pool_size: String.to_integer(System.get_env("DATABASE_POOL_SIZE") || "10")
+
 # The block below contains prod specific runtime configuration.
 
 # ## Using releases
@@ -61,7 +86,10 @@ if config_env() == :prod do
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
       port: port
     ],
-    secret_key_base: secret_key_base
+    secret_key_base: secret_key_base,
+    url: get_endpoint_url_config(canonical_uri),
+    static_url: get_endpoint_url_config(static_uri),
+    debug_errors: get_env("DEBUG_ERRORS", :boolean)
 
   # ## SSL Support
   #

@@ -1,0 +1,11 @@
+{application,eqrcode,
+             [{applications,[kernel,stdlib,elixir,logger]},
+              {description,"eqrcode"},
+              {modules,['Elixir.EQRCode','Elixir.EQRCode.Encode',
+                        'Elixir.EQRCode.GaloisField','Elixir.EQRCode.Mask',
+                        'Elixir.EQRCode.Matrix','Elixir.EQRCode.PNG',
+                        'Elixir.EQRCode.ReedSolomon','Elixir.EQRCode.Render',
+                        'Elixir.EQRCode.SVG','Elixir.EQRCode.SpecTable',
+                        'Elixir.Inspect.EQRCode.Matrix']},
+              {registered,[]},
+              {vsn,"0.1.10"}]}.
