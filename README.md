@@ -35,10 +35,12 @@ Here is an opinionated list of other useful libraries to consider:
 | Clustering                  | [libcluster](https://github.com/bitwalker/libcluster)                                 |
 
 ## Rename your porject
-1. Open the script `rename.sh`
-2. Change `NEW_NAME` & `NEW_OTP` variables with your app name
-3. Execute the script `sh rename.sh`
-3. Remove the file `rename.sh`
+1. Run `rename.sh` with the camel case name of your project
+
+```
+./rename.sh MyNewProjectName
+
+```
 
 ## Development with Docker
 
@@ -95,12 +97,11 @@ For convenience, you can use the commands included in the Makefile:
 1. Clone the project repository: `git clone git@github.com:Plus17/phoenix-boilerplate.git my_app`
 2. Go to project dir: `cd my_app`
 3. Install Erlang, Elixir & NodeJS using the `.tools-versions` file with: `asdf install`
-4. Install NodeJs usign the `.node-version` file with `fnm install`
-5. Copy the `env.dist` file to `.env` and set the `SECRET_KEY_BASE` value. Get a new value executing `mix phx.gen.secret`.
-6. Run `export $(cat .env | xargs)` on project root folder
-7. Run `mix local.hex && mix local.rebar`
-8. Run `mix setup` to download dependencies & setup database
-9. Run `mix phx.server`
+4. Copy the `env.dist` file to `.env` and set the `SECRET_KEY_BASE` value. Get a new value executing `mix phx.gen.secret`.
+5. Run `export $(cat .env | xargs)` on project root folder
+6. Run `mix local.hex && mix local.rebar`
+7. Run `mix setup` to download dependencies & setup database
+8. Run `mix phx.server`
 
 ### New environment variables
 
