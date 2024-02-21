@@ -34,7 +34,7 @@ Here is an opinionated list of other useful libraries to consider:
 | Feature Flags/Toggles       | [FunWithFlags](https://github.com/tompave/fun_with_flags)                             |
 | Clustering                  | [libcluster](https://github.com/bitwalker/libcluster)                                 |
 
-## Rename your porject
+## Rename your project
 1. Run `rename.sh` with the camel case name of your project
 
 ```
@@ -120,6 +120,69 @@ To start your Phoenix server:
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+
+## Phoenix Contexts
+
+In Phoenix, contexts often encapsulate data access and data validation. They often talk to a database or APIs. Overall, think of them as boundaries to decouple and isolate parts of your application.
+
+Contexts are modules and functions defining the public interface of your application.
+
+The choices about how to draw contexts in your application must be rooted in DDD (Domain Driven Development)
+
+In Phoenix contexts can also act as a encapsulation of something that tomorrow can be extracted in a separate microservice. 
+
+Naming things is hard. If you're stuck when trying to come up with a context name when the grouped functionality in your system isn't yet clear, you can simply use the plural form of the resource you're creating. For example, a `Products` context for managing products. As you grow your application and the parts of your system become clear, you can simply rename the context to a more refined one.
+
+Contexts act as that reusable layer for business logic. The names of modules/functions/parameters should reflect business domain concepts.
+
+Phoenix contexts can easily become quickly huge meatballs of code, to ease things out, we decide to split them into layers:
+
+    Public Context (the actual Context, the public API)
+    Schema (including changesets and validations)
+    Queries
+
+Here’s what that might look like:
+
+```
+├── posts/
+│   ├── posts.ex
+│   ├── post_schema.ex
+│   ├── post_queries.ex
+├── complex_context/
+│   ├── schemas/
+│   ├── queries/
+│   ├── sub_complex_context/
+│   ├── complex_context.ex
+├── utils/
+│   ├── util_a.ex
+│   ├── util_a_test.exs
+│   └── ...
+└── ...
+
+```
+
+The **Schema** layer (`post_schema.ex`) covers the Ecto schema, with changesets and validations. Now you can see easily which database schemas are in the context. The idea is to have something near to a OO Model without database interactions.
+
+The **Queries** layer (`post_queries.ex`) handles all the database operations, excluding validation. It’s for internal use within its context only. Can be split into schema based files.
+
+The **Public Context** layer (`posts.ex`) is the context’s public API to the rest of your app. Here, you’ll find business logic beyond queries or validation.
+
+Being an interface the public context can be made only of `defdelegate` functions calling the queries layer. https://hexdocs.pm/elixir/1.12/Kernel.html#defdelegate/2
+
+Splitting contexts into subcontextes like this and using `defdelegate` in the context module can help have all the public interface in one place and at the same time better manage code at the subcontext level.
+
+It’s totally ok for contexts to talk to each other so long as it’s happening through the “aggregate root” (ie, the context file, even if this isn’t the 100% true definition).
+
+Also when facing inter contexts operations `Services` can be used. Services must return an `Ecto.Multi` from call so that they can be composed together (see documentation resource [4])
+
+
+### Documentation
+
+[1] https://hexdocs.pm/phoenix/contexts.html
+[2] https://curiosum.com/blog/elixir-phoenix-context-maintainability-guildelines
+[3] https://michal.muskala.eu/post/putting-contexts-in-context/
+[4] https://luizdamim.com/blog/reorganizing-your-phoenix-contexts-as-use-cases/
+[5] https://speakerdeck.com/andrewhao/building-beautiful-systems-with-phoenix-contexts-and-ddd?slide=151
 
 ## Learn more
 
