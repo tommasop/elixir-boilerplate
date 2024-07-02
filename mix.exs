@@ -71,12 +71,8 @@ defmodule AppName.MixProject do
       # Configuration
       {:dotenv_parser, "~> 2.0"},
 
-      # Css framework and icons
-      {:heroicons, "~> 0.5"},
-
       # Dialyzer
       {:dialyxir, "~> 1.2", only: [:dev, :test], runtime: false},
-
       {:cors_plug, "~> 3.0"},
 
       # Instrumentation

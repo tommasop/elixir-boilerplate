@@ -14,7 +14,7 @@ defmodule AppName.VerifyAdminRequest do
 
   def init(options), do: options
 
-  def call(%{path_info: ["log_in" | _rest]} = conn, _opts) do
+  def call(%{path_info: ["api/login" | _rest]} = conn, _opts) do
     conn
   end
 

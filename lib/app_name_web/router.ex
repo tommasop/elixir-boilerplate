@@ -10,18 +10,29 @@ defmodule AppNameWeb.Router do
     plug :put_root_layout, html: {AppNameWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug AppName.VerifyAdminRequest
     plug :fetch_current_user
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    # plug(RemoteIp)
+    plug(Plug.RequestId, assign_as: :plug_request_id)
+    plug(JSONAPI.EnsureSpec)
+    plug(JSONAPI.Deserializer)
+    plug(JSONAPI.UnderscoreParameters)
+    plug(:accepts, ["json-api"])
+    plug(AppName.VerifyAdminRequest)
   end
 
   scope "/", AppNameWeb do
     pipe_through :browser
 
     get "/", PageController, :home
+  end
+
+  scope "/api", AppNameWeb do
+    pipe_through :api
+
+    get "/login", PageController, :home
   end
 
   # Other scopes may use custom stacks.
