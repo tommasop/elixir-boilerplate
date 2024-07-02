@@ -10,6 +10,7 @@ defmodule AppNameWeb.Router do
     plug :put_root_layout, html: {AppNameWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug AppName.VerifyAdminRequest
     plug :fetch_current_user
   end
 
