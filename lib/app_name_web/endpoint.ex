@@ -1,4 +1,5 @@
 defmodule AppNameWeb.Endpoint do
+  use Sentry.PlugCapture
   use Phoenix.Endpoint, otp_app: :app_name
 
   # The session will be stored in the cookie and signed,
@@ -42,6 +43,8 @@ defmodule AppNameWeb.Endpoint do
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
     json_decoder: Phoenix.json_library()
+
+  use Sentry.PlugCapture
 
   plug Plug.MethodOverride
   plug Plug.Head

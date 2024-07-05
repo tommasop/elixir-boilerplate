@@ -39,7 +39,7 @@ defmodule AppNameWeb do
   def controller do
     quote do
       use Phoenix.Controller,
-        formats: [:html, :json],
+        formats: [:json],
         layouts: [html: AppNameWeb.Layouts]
 
       import Plug.Conn
@@ -81,14 +81,9 @@ defmodule AppNameWeb do
 
   defp html_helpers do
     quote do
-      # HTML escaping functionality
-      import Phoenix.HTML
       # Core UI components and translation
       import AppNameWeb.CoreComponents
       import AppNameWeb.Gettext
-
-      # Shortcut for generating JS commands
-      alias Phoenix.LiveView.JS
 
       # Routes generation with the ~p sigil
       unquote(verified_routes())
