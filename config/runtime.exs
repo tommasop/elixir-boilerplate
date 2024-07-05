@@ -115,8 +115,9 @@ if config_env() == :prod do
   #
   # Sentry configuration
   config :sentry,
-  dsn: "https://86efe08075b69e31d44e16d2dfe8679d@o4507304654995456.ingest.de.sentry.io/4507549298327632",
-  environment_name: Mix.env(),
-  enable_source_code_context: true,
-  root_source_code_paths: [File.cwd!()]
+    dsn:
+      "https://86efe08075b69e31d44e16d2dfe8679d@o4507304654995456.ingest.de.sentry.io/4507549298327632",
+    environment_name: :prod,
+    enable_source_code_context: true,
+    root_source_code_paths: [File.cwd!()]
 end
