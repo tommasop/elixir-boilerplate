@@ -28,7 +28,7 @@ defmodule AppName.MixProject do
   def application do
     [
       mod: {AppName.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :hackney]
     ]
   end
 
@@ -43,9 +43,6 @@ defmodule AppName.MixProject do
     [
       {:bcrypt_elixir, "~> 3.0"},
       {:phoenix, "~> 1.7.7"},
-      {:phoenix_ecto, "~> 4.4"},
-      {:ecto_sql, "~> 3.10"},
-      {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 3.3"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.19.0"},
@@ -53,13 +50,13 @@ defmodule AppName.MixProject do
       {:phoenix_live_dashboard, "~> 0.8.0"},
       {:esbuild, "~> 0.7", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.2.0", runtime: Mix.env() == :dev},
-      {:swoosh, "~> 1.3"},
       {:finch, "~> 0.13"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
+      {:hackney, "1.18.2"},
 
       # Exception hunting
       {:sentry, "~> 10.2.0"},
@@ -70,12 +67,6 @@ defmodule AppName.MixProject do
       # Code quality
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.14", only: :test},
-
-      # Configuration
-      # {:dotenv_parser, "~> 2.0"},
-
-      # Dialyzer
-      {:dialyxir, "~> 1.2", only: [:dev, :test], runtime: false},
       {:cors_plug, "~> 3.0"},
 
       # Instrumentation
@@ -86,9 +77,6 @@ defmodule AppName.MixProject do
       {:opentelemetry_cowboy, "~> 0.2.1"},
       {:opentelemetry_phoenix, "~> 1.1"},
       {:opentelemetry_ecto, "~> 1.1"},
-
-      # Testing
-      {:ex_machina, "~> 2.7.0", only: [:dev, :test]},
 
       # Auth
       {:nimble_totp, "~> 0.1.0"},

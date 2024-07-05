@@ -7,10 +7,6 @@
 # General application configuration
 import Config
 
-config :app_name,
-  ecto_repos: [AppName.Repo],
-  generators: [binary_id: true]
-
 # Configures the endpoint
 config :app_name, AppNameWeb.Endpoint,
   url: [host: "localhost"],
@@ -28,11 +24,6 @@ config :app_name, AppNameWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :app_name, AppName.Mailer, adapter: Swoosh.Adapters.Local
-
-# Swoosh API client is needed for adapters other than SMTP.
-config :swoosh, :api_client, false
-
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.17.11",
