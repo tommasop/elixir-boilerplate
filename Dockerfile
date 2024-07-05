@@ -48,7 +48,6 @@ RUN mix deps.compile
 COPY priv priv
 
 COPY lib lib
-RUN rm lib/factory.ex
 
 COPY assets assets
 
