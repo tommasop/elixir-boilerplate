@@ -7,7 +7,7 @@ import AppName.ConfigHelpers
 # and secrets from environment variables or elsewhere. Do not define
 # any compile-time configuration in here, as it won't be applied.
 
-DotenvParser.load_file(".env.#{config_env()}")
+# DotenvParser.load_file(".env.#{config_env()}")
 
 canonical_uri = get_env("CANONICAL_URL", :uri)
 static_uri = get_env("STATIC_URL", :uri)
