@@ -61,6 +61,9 @@ defmodule AppName.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
 
+      # Exception hunting
+      {:sentry, "~> 10.2.0"},
+
       # API
       {:jsonapi, "~> 1.6"},
 
@@ -69,7 +72,7 @@ defmodule AppName.MixProject do
       {:excoveralls, "~> 0.14", only: :test},
 
       # Configuration
-      {:dotenv_parser, "~> 2.0"},
+      # {:dotenv_parser, "~> 2.0"},
 
       # Dialyzer
       {:dialyxir, "~> 1.2", only: [:dev, :test], runtime: false},
